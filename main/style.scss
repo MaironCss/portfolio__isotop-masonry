@@ -1,0 +1,340 @@
+// контейнер по умолчанию. Отступ между колонками
+$container: 1170px;
+$colGups: 15px;
+
+// размер текста
+$textFont-size: 1rem;  // 16px
+$linkColor: blue;
+
+// контрольные точки, на которых наш макет будет перестраиваться (могут меняться зависимости от дизайна)
+$breakpoints: (
+        xs: 0,
+        sm: 575px,
+        md: 768px,
+        lg: 1025px,
+        xl: 1200px,
+        xxl: 1440px
+);
+
+// количество колонок
+$columns: 12;
+
+// проходимся циклом по всем контрольным точкам
+@each $breakpoint in $breakpoints {
+
+  // в name записываем имя размера (xs, sm, md ...)
+  // в size записываем кол-во колонок, которые должен занимать элемент с эти классом.
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+  
+  // генерируем медиа запрос для ширины брейкпоинта, который сейчас является текущим в цикле.
+  @media only screen and (min-width: $size) {
+    [class*="col-#{$name}"] {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      padding-right: $colGups;
+      padding-left: $colGups;
+    }
+    @for $i from 1 through $columns {
+      .col-#{$name}-#{$i} {
+        flex-basis: 100% / $columns * $i;
+        max-width: 100% / $columns * $i;
+      }
+    }
+    @for $i from 1 through $columns {
+      .col-#{$name}-offset-#{$i} {
+        margin-left: 100% / $columns * $i
+      }
+    }
+  }
+}
+.container{
+  max-width: $container;
+  width: 100%;
+  margin: 0 auto;
+}
+// layout
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$colGups;
+  margin-left: -$colGups;
+}
+
+[class^='col']{
+  padding-left:$colGups;
+  padding-right:$colGups;
+  width: 100%;
+  min-height: 1px;
+}
+
+
+
+// main styles
+
+
+//buttons
+a, button{
+  transition: .3s ease-in;
+  transition-property: color, background-color, opacity;
+  svg{
+    fill:currentColor;
+  }
+}
+button, .button{
+  cursor: pointer;
+}
+
+*{
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	
+}
+ul{
+  list-style: none;
+}
+a{
+   text-decoration: none;
+}
+body{
+  margin: 0;
+  padding: 0;
+}
+//font-family: 'Playfair Display', serif;
+//font-family: 'Roboto', sans-serif;
+//font-family: 'Poppins', sans-serif;
+.portfolio{
+  background-image: url(../img/bgbg.png);
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+     
+
+}
+.ba-header{
+  display: flex;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  padding: 45px 215px 0 0;
+}
+.menu-list{
+  
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  
+}
+.menu-item{
+  margin-left:35px ;
+  & a{
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 1.125em;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    text-decoration: none;
+    &:hover{
+      font-weight: 700;
+      
+    }
+  }
+}
+.main-tagline{
+  font-size: 5em;
+  color: #FFF;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  padding: 250px 0 175px 0;
+}
+.leaf-left{
+  position: absolute;
+  top: 84%;
+  left: 0;
+}
+
+.leaf-right{
+  position: absolute;
+  top: 70%;
+  right: 0;
+}
+.gallery{
+  padding-bottom: 200px;
+}
+.gallery-nav{
+  padding: 20px 0 80px 0;
+}
+.gallery-list{
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.gallery-list__item{
+  margin: 0 19.5px;
+  & a{
+    font-size: 1.125em;
+    color:#41228e;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    &:hover,
+    &:focus{
+      font-weight: 700;
+    }
+    
+    
+  }
+}
+.gallery-item{
+  width: 33%;
+  margin-bottom: 10px;
+
+}
+.clients{
+  background-color: #f8f9fa;
+  padding: 90px 0 120px 0;
+}
+.clients-tagline{
+  margin: 0;
+  font-size: 3.750em;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+.clents-list{
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  max-width: 1000px;
+      align-items: center;
+      padding-top: 83px;
+}
+.clients-list__item + .clients-list__item{
+  margin-left: 33px;
+}
+.clients-list__item{
+  cursor: pointer;
+  opacity: .5;
+  &:hover{
+    opacity: 1;
+  }
+  
+}
+.contact{
+  padding-top: 30px;
+  background-image: url(../img/contbg.png);
+  -webkit-background-size: cover;
+       -o-background-size: cover;
+          background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 500px;
+}
+.contact-tagline{
+  margin: 0 0 100px 0;
+   font-size: 3.750em;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  
+}
+.contact-form{
+  position: absolute;
+  padding: 50px 65px 42px 65px;
+  left: 50%;
+  width: 767px;
+  top: 116px;
+   -webkit-border-radius: 5px;
+              border-radius: 5px;
+  -webkit-transform: translateX(-50%);
+     -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+       -o-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: #FFF;
+}
+.form-desc{
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+     
+}
+.form-tagline{
+  font-size: 1.375em;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 65px;
+}
+input{
+  width: 265px;
+  height: 55px;
+  font-size: 0.938em;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 5px;
+  border: none;
+  border-bottom: 1px solid #e3e3e3;
+  margin-bottom: 57px;
+}
+textarea{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #e3e3e3;
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+  padding-left: 5px;
+  margin-bottom: 44px;
+  resize: none;
+}
+.submit-btn{
+  width: 355px;
+  height: 60px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  background-color: #41228e;
+  color: #fff;
+  border: none;
+  margin: 0 auto;
+  display: block;
+  font-size: 1.375em;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+}
+.ba-footer{
+  background-color: #222;
+  padding-top: 245px;
+  
+}
+.footer-content{
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding-bottom: 65px;
+}
+.footer-desc{
+  max-width: 280px;
+  & a{
+    font-size: 1.375em;
+    color: #FFF;
+    font-family: 'Playfair Display', serif;
+  }
+}
+.desc-tag{
+  font-size: 1.125em;
+  color: #7A7A7A;
+}
+.rights{
+  padding: 45px 0  70px 0;
+  border-top: 1px solid #363636;
+  background-color: #222;
+}
+.aside-rights{
+  margin: 0;
+  font-size: 0.938em;
+  font-family: 'Roboto', sans-serif;
+  color: #747474;
+  text-align: center;
+  
+}
